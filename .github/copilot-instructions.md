@@ -7,6 +7,7 @@
 - Ensure code quality and maintainability.
 - Always follow best practices and industry standards.
 - Always use the Context7 for generating code snippets.
+<!-- - If you can't do a task, stop and say you can't do it. And explain what the user has to do to get it done. -->
 
 ## General Java Development Practices
 
