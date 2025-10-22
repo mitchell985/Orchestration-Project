@@ -1,16 +1,19 @@
 package com.orch.order_service.order_service.service;
 
-import com.orch.order_service.order_service.model.Order;
-import com.orch.order_service.order_service.model.OrderStatus;
+import java.math.BigDecimal;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
-
-import static org.junit.jupiter.api.Assertions.*;
+import com.orch.order_service.order_service.model.Order;
+import com.orch.order_service.order_service.model.OrderStatus;
 
 /**
  * Unit tests for OrderService
@@ -23,6 +26,7 @@ class OrderServiceTest {
     private OrderService orderService;
 
     @BeforeEach
+    @SuppressWarnings("unused")
     void setUp() {
         orderService = new OrderService();
     }
@@ -123,9 +127,11 @@ class OrderServiceTest {
         String customerId = "CUST001";
         BigDecimal negativeAmount = new BigDecimal("-100.00");
 
-        // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            orderService.createOrder(customerId, negativeAmount);
-        });
+        // Act
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+                () -> orderService.createOrder(customerId, negativeAmount));
+
+        // Assert
+        assertEquals("Amount must be positive", ex.getMessage()); // adjust to your actual message
     }
 }
