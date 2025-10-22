@@ -131,3 +131,4 @@ Each service:
 
 - [ ] Fix tests in order_service
 - [ ] Test Prometheus + Grafana, run it as part of the docker compose
+- [ ] Research automated quality gates
