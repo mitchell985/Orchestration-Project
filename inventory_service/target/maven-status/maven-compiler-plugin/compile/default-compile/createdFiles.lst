@@ -1,0 +1,8 @@
+com/orch/inventory_service/inventory_service/InventoryServiceApplication.class
+com/orch/inventory_service/inventory_service/service/InventoryService.class
+com/orch/inventory_service/inventory_service/controller/InventoryController$UpdateQuantityRequest.class
+com/orch/inventory_service/inventory_service/repository/InventoryRepository.class
+com/orch/inventory_service/inventory_service/controller/InventoryController$CreateItemRequest.class
+com/orch/inventory_service/inventory_service/entity/InventoryItem.class
+com/orch/inventory_service/inventory_service/controller/InventoryController.class
+com/orch/inventory_service/inventory_service/controller/InventoryController$AvailabilityResponse.class
