@@ -97,9 +97,9 @@ Each service:
 
 - [x] Add Micrometer to each service
 - [x] Expose `/actuator/prometheus` metrics
-- [x] Deploy Prometheus + Grafana in K8s
-- [x] Build Grafana dashboard (requests, latency, errors)
-- [x] Document dashboard setup
+- [ ] Deploy Prometheus + Grafana in K8s
+- [ ] Build Grafana dashboard (requests, latency, errors)
+- [ ] Document dashboard setup
 
 ---
 
@@ -130,3 +130,4 @@ Each service:
 ## Extras
 
 - [ ] Fix tests in order_service
+- [ ] Test Prometheus + Grafana, run it as part of the docker compose
