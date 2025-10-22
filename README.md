@@ -137,6 +137,10 @@ Example
 curl -s -X POST http://localhost:8081/api/orders \
    -H 'Content-Type: application/json' \
    -d '{"customerId":"cust-123","totalAmount": 99.99}'
+
+   # List orders
+curl -s -X GET http://localhost:8081/api/orders \
+   -H 'Content-Type: application/json'
 ```
 
 ### Inventory Service ([http://localhost:8082](http://localhost:8082))

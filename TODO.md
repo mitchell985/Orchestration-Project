@@ -127,4 +127,6 @@ Each service:
 
 ---
 
-**ALL TASKS COMPLETED! ✅**
+## Extras
+
+- [ ] Fix tests in order_service
