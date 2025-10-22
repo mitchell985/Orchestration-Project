@@ -33,7 +33,7 @@ README.md
 
 Each service:
 
-- Written in **Java 17** using **Spring Boot**
+- Written in **Java** using **Spring Boot**
 - Owns its own **PostgreSQL** or **H2** database
 - Exposes **REST** APIs
 - Provides metrics through `/actuator/prometheus`
@@ -47,14 +47,15 @@ Each service:
 
 ## Java and Spring Boot
 
-- [x] Show modern Java features
-  - [x] Use `var`, records, streams, Optionals
-  - [x] Create `module-info.java` example
-- [x] Generate new Spring Boot project via Spring Initializr
+- [] Show modern Java features
+  - [ ] Use `var`, `records`, `streams`, `Optionals`
+  - [ ] Create `module-info.java` example
+- [ ] Generate Spring Boot projects via Spring Initializr
 - [ ] Add dependencies: Web, Actuator, DevTools, Lombok
 - [ ] Create REST endpoint `/health` returning JSON
 - [ ] Implement service + repository layers
 - [ ] Configure `application.properties` with multiple profiles
+- [ ] Test the setup
 
 ---
 
