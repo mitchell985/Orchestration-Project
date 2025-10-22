@@ -6,7 +6,7 @@ To-do list for the creation of a project to fulfil the requirements for a develo
 
 ### 🏗️ Project Structure
 
-```doc
+```text
 /order-service
 /inventory-service
 /customer-service
@@ -50,13 +50,11 @@ Each service:
 - [x] Show modern Java features
   - [x] Use `var`, records, streams, Optionals
   - [x] Create `module-info.java` example
-- [x] Build a small CLI demo (`film-catalog`)
-- [ ] Generate new Spring Boot project via Spring Initializr
+- [x] Generate new Spring Boot project via Spring Initializr
 - [ ] Add dependencies: Web, Actuator, DevTools, Lombok
 - [ ] Create REST endpoint `/health` returning JSON
 - [ ] Implement service + repository layers
 - [ ] Configure `application.properties` with multiple profiles
-- [ ] Ask Copilot: _"generate REST controller with GET /api/hello"_
 
 ---
 
@@ -67,25 +65,20 @@ Each service:
 - [ ] Implement CRUD endpoints
 - [ ] Call between services with WebClient
 - [ ] Add logging + error handling
-- [ ] Ask Copilot: _"generate integration call from order-service to inventory-service"_
 
 ---
 
 ## Containerization
 
-Use Openshift?
-
 - [ ] Write multi-stage Dockerfile for each service
 - [ ] Build + run containers locally
 - [ ] Create `docker-compose.yml` for all services
 - [ ] Verify inter-service communication
-- [ ] Ask Copilot: _"generate Dockerfile for Spring Boot app using openjdk:17-jdk-slim"_
-- [ ] Install Minikube or kind or Openshift
+- [ ] Install Openshift
 - [ ] Create Deployment + Service YAMLs
 - [ ] Add ConfigMap + Secret YAMLs
 - [ ] Apply manifests → verify pods
 - [ ] Scale replicas + test rolling updates
-- [ ] Ask Copilot: _"generate K8s deployment for dockerized Spring Boot service"_
 
 ---
 
@@ -93,7 +86,6 @@ Use Openshift?
 
 - [ ] Create Azure DevOps account + project
 - [ ] Link GitHub repo
-- [ ] Ask Copilot: _"generate azure-pipelines.yml for Java + Docker project"_
 - [ ] Define stages: Build → Test → Docker Build → Deploy
 - [ ] Configure variables, triggers, build agent
 - [ ] Add bash/Python helper scripts for deployment tasks
@@ -105,7 +97,6 @@ Use Openshift?
 - [ ] Add Micrometer to each service
 - [ ] Expose `/actuator/prometheus` metrics
 - [ ] Deploy Prometheus + Grafana in K8s
-- [ ] Ask Copilot: _"generate Prometheus scrape config for actuator endpoints"_
 - [ ] Build Grafana dashboard (requests, latency, errors)
 - [ ] Document dashboard setup
 
@@ -115,7 +106,6 @@ Use Openshift?
 
 - [ ] Add JUnit 5 + Mockito
 - [ ] Write unit + integration tests
-- [ ] Ask Copilot: _"generate unit test for OrderService.createOrder()"_
 - [ ] Add Cucumber (Gherkin) for behaviour tests
 - [ ] Integrate all tests into Azure pipeline
 
@@ -127,16 +117,11 @@ Use Openshift?
 - [ ] Write user stories + acceptance criteria
 - [ ] Plan two 1-week sprints
 - [ ] After each, note completed vs pending
-- [ ] Ask Copilot: _"summarize sprint results and write retrospective notes"_
 
 ---
 
 ## Last adjustments
 
 - [ ] Write `README.md` with architecture diagram, pipeline flow, dashboards
-- [ ] Record short demo GIF or video
-- [ ] Push project to GitHub
-- [ ] Ask Copilot: _"generate Mermaid diagram for microservice architecture"_
-- [ ] Prepare STAR-format interview stories
 
 ---

@@ -1,4 +1,4 @@
-# Orchestration-Project · order_service
+# Orchestration-Project
 
 A minimal Spring Boot 3 service that serves a simple landing page for an Order Service. This module is intended to be part of a larger orchestration system and currently exposes a single HTTP endpoint that renders a static HTML page.
 
