@@ -132,6 +132,6 @@ class OrderServiceTest {
                 () -> orderService.createOrder(customerId, negativeAmount));
 
         // Assert
-        assertEquals("Amount must be positive", ex.getMessage()); // adjust to your actual message
+        assertEquals("Must be positive", ex.getMessage());
     }
 }
