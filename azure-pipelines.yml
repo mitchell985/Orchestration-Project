@@ -1,0 +1,213 @@
+# Azure DevOps Pipeline for Microservices
+# Demonstrates CI/CD pipeline with multiple stages
+
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+  paths:
+    include:
+      - order_service/**
+      - inventory_service/**
+      - customer_service/**
+      - k8s/**
+
+variables:
+  # Docker registry settings
+  dockerRegistryServiceConnection: "MyDockerRegistry"
+  imageRepository: "microservices"
+  containerRegistry: "myregistry.azurecr.io"
+  dockerfilePath: "**/Dockerfile"
+  tag: "$(Build.BuildId)"
+
+  # Kubernetes settings
+  kubernetesServiceConnection: "MyK8sCluster"
+  namespace: "microservices"
+
+stages:
+  - stage: Build
+    displayName: "Build Stage"
+    jobs:
+      - job: BuildServices
+        displayName: "Build Microservices"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - task: Maven@3
+            displayName: "Build Order Service"
+            inputs:
+              mavenPomFile: "order_service/pom.xml"
+              goals: "clean package"
+              options: "-DskipTests"
+              publishJUnitResults: false
+              javaHomeOption: "JDKVersion"
+              jdkVersionOption: "1.21"
+              mavenVersionOption: "Default"
+
+          - task: Maven@3
+            displayName: "Build Inventory Service"
+            inputs:
+              mavenPomFile: "inventory_service/pom.xml"
+              goals: "clean package"
+              options: "-DskipTests"
+              publishJUnitResults: false
+              javaHomeOption: "JDKVersion"
+              jdkVersionOption: "1.21"
+              mavenVersionOption: "Default"
+
+          - task: Maven@3
+            displayName: "Build Customer Service"
+            inputs:
+              mavenPomFile: "customer_service/pom.xml"
+              goals: "clean package"
+              options: "-DskipTests"
+              publishJUnitResults: false
+              javaHomeOption: "JDKVersion"
+              jdkVersionOption: "1.21"
+              mavenVersionOption: "Default"
+
+          - task: PublishBuildArtifacts@1
+            displayName: "Publish Build Artifacts"
+            inputs:
+              pathToPublish: "$(Build.ArtifactStagingDirectory)"
+              artifactName: "drop"
+
+  - stage: Test
+    displayName: "Test Stage"
+    dependsOn: Build
+    jobs:
+      - job: RunTests
+        displayName: "Run Unit Tests"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - task: Maven@3
+            displayName: "Test Order Service"
+            inputs:
+              mavenPomFile: "order_service/pom.xml"
+              goals: "test"
+              publishJUnitResults: true
+              testResultsFiles: "**/surefire-reports/TEST-*.xml"
+              javaHomeOption: "JDKVersion"
+              jdkVersionOption: "1.21"
+
+          - task: Maven@3
+            displayName: "Test Inventory Service"
+            inputs:
+              mavenPomFile: "inventory_service/pom.xml"
+              goals: "test"
+              publishJUnitResults: true
+              testResultsFiles: "**/surefire-reports/TEST-*.xml"
+              javaHomeOption: "JDKVersion"
+              jdkVersionOption: "1.21"
+
+          - task: Maven@3
+            displayName: "Test Customer Service"
+            inputs:
+              mavenPomFile: "customer_service/pom.xml"
+              goals: "test"
+              publishJUnitResults: true
+              testResultsFiles: "**/surefire-reports/TEST-*.xml"
+              javaHomeOption: "JDKVersion"
+              jdkVersionOption: "1.21"
+
+  - stage: DockerBuild
+    displayName: "Docker Build Stage"
+    dependsOn: Test
+    jobs:
+      - job: BuildDockerImages
+        displayName: "Build and Push Docker Images"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - task: Docker@2
+            displayName: "Build Order Service Image"
+            inputs:
+              command: buildAndPush
+              repository: "$(imageRepository)/order-service"
+              dockerfile: "order_service/Dockerfile"
+              containerRegistry: "$(dockerRegistryServiceConnection)"
+              tags: |
+                $(tag)
+                latest
+
+          - task: Docker@2
+            displayName: "Build Inventory Service Image"
+            inputs:
+              command: buildAndPush
+              repository: "$(imageRepository)/inventory-service"
+              dockerfile: "inventory_service/Dockerfile"
+              containerRegistry: "$(dockerRegistryServiceConnection)"
+              tags: |
+                $(tag)
+                latest
+
+          - task: Docker@2
+            displayName: "Build Customer Service Image"
+            inputs:
+              command: buildAndPush
+              repository: "$(imageRepository)/customer-service"
+              dockerfile: "customer_service/Dockerfile"
+              containerRegistry: "$(dockerRegistryServiceConnection)"
+              tags: |
+                $(tag)
+                latest
+
+  - stage: Deploy
+    displayName: "Deploy to Kubernetes"
+    dependsOn: DockerBuild
+    jobs:
+      - deployment: DeployToK8s
+        displayName: "Deploy Microservices"
+        pool:
+          vmImage: "ubuntu-latest"
+        environment: "production"
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: KubernetesManifest@0
+                  displayName: "Deploy ConfigMaps"
+                  inputs:
+                    action: "deploy"
+                    kubernetesServiceConnection: "$(kubernetesServiceConnection)"
+                    namespace: "$(namespace)"
+                    manifests: |
+                      k8s/configmaps/**/*.yaml
+
+                - task: KubernetesManifest@0
+                  displayName: "Deploy Secrets"
+                  inputs:
+                    action: "deploy"
+                    kubernetesServiceConnection: "$(kubernetesServiceConnection)"
+                    namespace: "$(namespace)"
+                    manifests: |
+                      k8s/secrets/**/*.yaml
+
+                - task: KubernetesManifest@0
+                  displayName: "Deploy Services"
+                  inputs:
+                    action: "deploy"
+                    kubernetesServiceConnection: "$(kubernetesServiceConnection)"
+                    namespace: "$(namespace)"
+                    manifests: |
+                      k8s/services/**/*.yaml
+
+                - task: KubernetesManifest@0
+                  displayName: "Deploy Applications"
+                  inputs:
+                    action: "deploy"
+                    kubernetesServiceConnection: "$(kubernetesServiceConnection)"
+                    namespace: "$(namespace)"
+                    manifests: |
+                      k8s/deployments/**/*.yaml
+                    containers: |
+                      $(containerRegistry)/$(imageRepository)/order-service:$(tag)
+                      $(containerRegistry)/$(imageRepository)/inventory-service:$(tag)
+                      $(containerRegistry)/$(imageRepository)/customer-service:$(tag)
+
+                - bash: |
+                    echo "Deployment completed successfully!"
+                    kubectl get pods -n $(namespace)
+                  displayName: "Verify Deployment"

@@ -1,130 +1,93 @@
-# Orchestration-Project
+# Developer Orchestration Project
 
-A minimal Spring Boot 3 service that serves a simple landing page for an Order Service. This module is intended to be part of a larger orchestration system and currently exposes a single HTTP endpoint that renders a static HTML page.
+A comprehensive microservices demonstration project showcasing modern Java development, containerization, Kubernetes/OpenShift deployment, and CI/CD practices using Azure DevOps.
 
-## Tech stack
+## 🎯 Project Overview
 
-- Java 21
-- Spring Boot 3.5.6
-  - spring-boot-starter-web
-  - spring-boot-starter-test (JUnit 5)
-- Maven Wrapper (`mvnw`)
+This project demonstrates a complete microservices architecture built with **Java Spring Boot 3**, containerized with **Docker**, deployed on **Kubernetes/OpenShift**, and automated with **Azure DevOps CI/CD pipelines**.
 
-## Repository layout
+## 🏗️ Technologies Used
 
-```text
+### Core Technologies
+- **Java 21** - Modern Java features (records, var, streams, Optional)
+- **Spring Boot 3.5.6** - Microservices framework
+- **Spring Data JPA** - Database abstraction
+- **H2 Database** - In-memory database (dev/test)
+- **PostgreSQL** - Production database support
+
+### DevOps & Infrastructure
+- **Docker** - Containerization
+- **Docker Compose** - Multi-container orchestration
+- **Kubernetes/OpenShift** - Container orchestration
+- **Azure DevOps** - CI/CD pipeline
+- **Maven** - Build automation
+
+### Monitoring & Observability
+- **Spring Boot Actuator** - Application metrics
+- **Micrometer** - Metrics facade
+- **Prometheus** - Metrics collection
+- **Grafana** - Metrics visualization
+
+## 📁 Project Structure
+
+```
 .
-├─ README.md                # This file
-├─ TODO.md
-└─ order_service/
-   ├─ HELP.md
-   ├─ mvnw, mvnw.cmd        # Maven wrapper scripts
-   ├─ pom.xml               # Spring Boot 3, Java 21
-   ├─ src/
-   │  ├─ main/
-   │  │  ├─ java/com/orch/order_service/order_service/
-   │  │  │  ├─ HomeController.java          # Maps "/" to index page
-   │  │  │  └─ OrderServiceApplication.java # Bootstraps the app
-   │  │  └─ resources/
-   │  │     ├─ application.properties       # spring.application.name=order_service
-   │  │     └─ static/
-   │  │        └─ index.html                # Landing page
-   │  └─ test/
-   │     └─ java/com/orch/order_service/order_service/
-   │        └─ OrderServiceApplicationTests.java # Context load test
-  └─ target/               # Build outputs (generated)
+├── order_service/          # Order management microservice
+├── inventory_service/      # Inventory management microservice
+├── customer_service/       # Customer management microservice
+├── k8s/                    # Kubernetes manifests
+├── scripts/                # Helper scripts
+├── docker-compose.yml      # Docker Compose configuration
+├── azure-pipelines.yml     # Azure DevOps pipeline
+└── README.md              # This file
 ```
 
-## How to run (macOS · zsh)
+## 🚀 Getting Started
 
-Prerequisites:
+### Prerequisites
+- Java 21 or higher
+- Maven 3.9+
+- Docker & Docker Compose
 
-- JDK 21 installed and selected as your active Java (Spring Boot 3.5 requires Java 17+; this project targets Java 21).
+### Local Development
 
-Run locally with the Maven wrapper:
+1. **Build the services**
+   ```bash
+   cd order_service && ./mvnw clean package
+   cd ../inventory_service && ./mvnw clean package
+   cd ../customer_service && ./mvnw clean package
+   ```
 
-```bash
-cd order_service
-./mvnw spring-boot:run
-```
+2. **Run with Docker Compose**
+   ```bash
+   docker-compose up --build
+   ```
 
-By default the app starts on [http://localhost:8080](http://localhost:8080).
+3. **Access the services**
+   - Order Service: http://localhost:8081/actuator/health
+   - Inventory Service: http://localhost:8082/actuator/health
+   - Customer Service: http://localhost:8083/actuator/health
 
-## Build, test, and package
+## 📈 Modern Java Features Demonstrated
 
-- Run tests:
+- **Records** - Immutable data carriers for DTOs
+- **var** - Local variable type inference
+- **Streams API** - Functional-style operations
+- **Optional** - Null-safe API design
 
-  ```bash
-  cd order_service
-  ./mvnw test
-  ```
+## 🎯 Best Practices
 
-- Build an executable JAR:
+- ✅ SOLID principles
+- ✅ Microservices architecture
+- ✅ Container best practices
+- ✅ Infrastructure as Code
+- ✅ CI/CD automation
 
-  ```bash
-  cd order_service
-  ./mvnw -DskipTests clean package
-  ls -l target/order_service-0.0.1-SNAPSHOT.jar
-  ```
+## 👤 Author
 
-- Run the packaged JAR:
-
-  ```bash
-  cd order_service
-  java -jar target/order_service-0.0.1-SNAPSHOT.jar
-  ```
-
-## Configuration
-
-Configuration lives in `order_service/src/main/resources/application.properties`.
-
-Defaults:
-
-- `spring.application.name=order_service`
-- Server port: `8080` (Spring Boot default)
-
-To change the port, set for example:
-
-```properties
-server.port=8081
-```
-
-## Endpoints
-
-- GET `/` — Renders the static landing page located at `src/main/resources/static/index.html`.
-
-Quick check:
-
-```bash
-curl -i http://localhost:8080/
-```
-
-Note: Static assets are served from `/static`. The `HomeController` maps `/` to `index.html`.
-
-## Development notes
-
-- Hot reload: You can re-run `./mvnw spring-boot:run` after changes; for instant reload you can add Spring DevTools later.
-- No database or persistence layer is configured yet.
-- No actuator/health endpoints are included; add `spring-boot-starter-actuator` if needed.
-
-## Troubleshooting
-
-- Port already in use: Change `server.port` or stop the conflicting process.
-- Java version mismatch: Ensure `java -version` shows 21. If using SDKMAN or jenv, switch the active Java accordingly.
-- Clean build artifacts:
-
-  ```bash
-  cd order_service
-  ./mvnw clean
-  ```
-
-## Next steps (suggestions)
-
-- Add domain endpoints for order management (CRUD REST API).
-- Introduce persistence (Spring Data JPA + PostgreSQL) and Flyway migrations.
-- Add actuator for health and readiness probes.
-- Containerize with a Dockerfile and CI workflow.
+**Mitchell**
+- GitHub: [@mitchell985](https://github.com/mitchell985)
 
 ---
 
-Maintained by `mitchell985`. If you extend this module, keep code simple (KISS), avoid duplication (DRY), and follow OWASP best practices.
+**Built to demonstrate modern DevOps practices**

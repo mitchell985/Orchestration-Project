@@ -47,82 +47,84 @@ Each service:
 
 ## Java and Spring Boot
 
-- [] Show modern Java features
-  - [ ] Use `var`, `records`, `streams`, `Optionals`
-  - [ ] Create `module-info.java` example
-- [ ] Generate Spring Boot projects via Spring Initializr
-- [ ] Add dependencies: Web, Actuator, DevTools, Lombok
-- [ ] Create REST endpoint `/health` returning JSON
-- [ ] Implement service + repository layers
-- [ ] Configure `application.properties` with multiple profiles
-- [ ] Test the setup
+- [x] Show modern Java features
+  - [x] Use `var`, `records`, `streams`, `Optionals`
+  - [x] Create `module-info.java` example
+- [x] Generate Spring Boot projects via Spring Initializr
+- [x] Add dependencies: Web, Actuator, DevTools, Lombok
+- [x] Create REST endpoint `/health` returning JSON
+- [x] Implement service + repository layers
+- [x] Configure `application.properties` with multiple profiles
+- [x] Test the setup
 
 ---
 
 ## Multi-Service
 
-- [ ] Create three Spring Boot microservices: **order**, **inventory**, **customer**
-- [ ] Give each its own DB (H2 or PostgreSQL)
-- [ ] Implement CRUD endpoints
-- [ ] Call between services with WebClient
-- [ ] Add logging + error handling
+- [x] Create three Spring Boot microservices: **order**, **inventory**, **customer**
+- [x] Give each its own DB (H2 or PostgreSQL)
+- [x] Implement CRUD endpoints
+- [x] Call between services with WebClient
+- [x] Add logging + error handling
 
 ---
 
 ## Containerization
 
-- [ ] Write multi-stage Dockerfile for each service
-- [ ] Build + run containers locally
-- [ ] Create `docker-compose.yml` for all services
-- [ ] Verify inter-service communication
-- [ ] Install Openshift
-- [ ] Create Deployment + Service YAMLs
-- [ ] Add ConfigMap + Secret YAMLs
-- [ ] Apply manifests → verify pods
-- [ ] Scale replicas + test rolling updates
+- [x] Write multi-stage Dockerfile for each service
+- [x] Build + run containers locally
+- [x] Create `docker-compose.yml` for all services
+- [x] Verify inter-service communication
+- [x] Install Openshift
+- [x] Create Deployment + Service YAMLs
+- [x] Add ConfigMap + Secret YAMLs
+- [x] Apply manifests → verify pods
+- [x] Scale replicas + test rolling updates
 
 ---
 
 ## Azure DevOps CI/CD
 
-- [ ] Create Azure DevOps account + project
-- [ ] Link GitHub repo
-- [ ] Define stages: Build → Test → Docker Build → Deploy
-- [ ] Configure variables, triggers, build agent
-- [ ] Add bash/Python helper scripts for deployment tasks
+- [x] Create Azure DevOps account + project
+- [x] Link GitHub repo
+- [x] Define stages: Build → Test → Docker Build → Deploy
+- [x] Configure variables, triggers, build agent
+- [x] Add bash/Python helper scripts for deployment tasks
 
 ---
 
 ## Monitoring Setup
 
-- [ ] Add Micrometer to each service
-- [ ] Expose `/actuator/prometheus` metrics
-- [ ] Deploy Prometheus + Grafana in K8s
-- [ ] Build Grafana dashboard (requests, latency, errors)
-- [ ] Document dashboard setup
+- [x] Add Micrometer to each service
+- [x] Expose `/actuator/prometheus` metrics
+- [x] Deploy Prometheus + Grafana in K8s
+- [x] Build Grafana dashboard (requests, latency, errors)
+- [x] Document dashboard setup
 
 ---
 
 ## Testing Automation
 
-- [ ] Add JUnit 5 + Mockito
-- [ ] Write unit + integration tests
-- [ ] Add Cucumber (Gherkin) for behaviour tests
-- [ ] Integrate all tests into Azure pipeline
+- [x] Add JUnit 5 + Mockito
+- [x] Write unit + integration tests
+- [x] Add Cucumber (Gherkin) for behaviour tests
+- [x] Integrate all tests into Azure pipeline
 
 ---
 
 ## Agile
 
-- [ ] Create product backlog (Azure Boards or Trello)
-- [ ] Write user stories + acceptance criteria
-- [ ] Plan two 1-week sprints
-- [ ] After each, note completed vs pending
+- [x] Create product backlog (Azure Boards or Trello)
+- [x] Write user stories + acceptance criteria
+- [x] Plan two 1-week sprints
+- [x] After each, note completed vs pending
 
 ---
 
 ## Last adjustments
 
-- [ ] Write `README.md` with architecture diagram, pipeline flow, dashboards
+- [x] Write `README.md` with architecture diagram, pipeline flow, dashboards
 
 ---
+
+**ALL TASKS COMPLETED! ✅**
