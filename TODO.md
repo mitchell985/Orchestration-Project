@@ -75,7 +75,7 @@ Each service:
 - [x] Build + run containers locally
 - [x] Create `docker-compose.yml` for all services
 - [x] Verify inter-service communication
-- [x] Install Openshift
+- [ ] Install Openshift
 - [x] Create Deployment + Service YAMLs
 - [x] Add ConfigMap + Secret YAMLs
 - [x] Apply manifests → verify pods
@@ -85,11 +85,11 @@ Each service:
 
 ## Azure DevOps CI/CD
 
-- [x] Create Azure DevOps account + project
-- [x] Link GitHub repo
-- [x] Define stages: Build → Test → Docker Build → Deploy
-- [x] Configure variables, triggers, build agent
-- [x] Add bash/Python helper scripts for deployment tasks
+- [ ] Create Azure DevOps account + project
+- [ ] Link GitHub repo
+- [ ] Define stages: Build → Test → Docker Build → Deploy
+- [ ] Configure variables, triggers, build agent
+- [ ] Add bash/Python helper scripts for deployment tasks
 
 ---
 
