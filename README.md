@@ -74,6 +74,26 @@ This project demonstrates a complete microservices architecture built with **Jav
    - Inventory Service: <http://localhost:8082/actuator/health>
    - Customer Service: <http://localhost:8083/actuator/health>
 
+## 📊 Monitoring & Observability
+
+This project uses Prometheus and Grafana for monitoring. The services are configured to expose metrics in Prometheus format, and a Grafana dashboard is provided to visualize these metrics.
+
+### Prometheus
+
+Prometheus is configured to scrape metrics from the following endpoints:
+
+- **Order Service:** `http://order-service:8081/actuator/prometheus`
+- **Inventory Service:** `http://inventory-service:8082/actuator/prometheus`
+- **Customer Service:** `http://customer-service:8083/actuator/prometheus`
+
+### Grafana
+
+A pre-configured Grafana dashboard is available to visualize the metrics from the services. You can access it at `http://localhost:3000`. The default login is `admin`/`admin`.
+
+The dashboard provides a basic overview of the services, including:
+
+- **Order Service Requests:** The rate of requests to the order service.
+
 ## � API Endpoints
 
 The system consists of three Spring Boot microservices. Below are the HTTP APIs exposed by each service with their purpose, inputs, and outputs.

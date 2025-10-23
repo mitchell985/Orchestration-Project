@@ -75,7 +75,6 @@ Each service:
 - [x] Build + run containers locally
 - [x] Create `docker-compose.yml` for all services
 - [x] Verify inter-service communication
-- [ ] Install Openshift
 - [x] Create Deployment + Service YAMLs
 - [x] Add ConfigMap + Secret YAMLs
 - [x] Apply manifests → verify pods
@@ -97,9 +96,10 @@ Each service:
 
 - [x] Add Micrometer to each service
 - [x] Expose `/actuator/prometheus` metrics
-- [ ] Deploy Prometheus + Grafana in K8s
-- [ ] Build Grafana dashboard (requests, latency, errors)
-- [ ] Document dashboard setup
+- [x] Add Prometheus + Grafana in the docker compose
+- [x] Add all of the exposed `/actuator/prometheus` metrics to the docker
+- [ ] Build Grafana dashboard for all of these metric (requests, latency, errors)
+- [ ] Document dashboard setup in the README.md, including a link to visit the dashboard.
 
 ---
 
@@ -129,6 +129,5 @@ Each service:
 
 ## Extras
 
-- [ ] Fix tests in order_service
+- [x] Fix tests in order_service
 - [ ] Test Prometheus + Grafana, run it as part of the docker compose
-- [ ] Research automated quality gates
