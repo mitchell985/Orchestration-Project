@@ -98,8 +98,8 @@ Each service:
 - [x] Expose `/actuator/prometheus` metrics
 - [x] Add Prometheus + Grafana in the docker compose
 - [x] Add all of the exposed `/actuator/prometheus` metrics to the docker
-- [ ] Build Grafana dashboard for all of these metric (requests, latency, errors)
-- [ ] Document dashboard setup in the README.md, including a link to visit the dashboard.
+- [x] Build Grafana dashboard for all of these metric (requests, latency, errors)
+- [x] Document dashboard setup in the README.md, including a link to visit the dashboard.
 
 ---
 
@@ -126,8 +126,3 @@ Each service:
 - [x] Write `README.md` with architecture diagram, pipeline flow, dashboards
 
 ---
-
-## Extras
-
-- [x] Fix tests in order_service
-- [ ] Test Prometheus + Grafana, run it as part of the docker compose
