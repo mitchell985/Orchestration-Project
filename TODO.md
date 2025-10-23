@@ -84,11 +84,12 @@ Each service:
 
 ## Azure DevOps CI/CD
 
-- [ ] Create Azure DevOps account + project
-- [ ] Link GitHub repo
-- [ ] Define stages: Build → Test → Docker Build → Deploy
-- [ ] Configure variables, triggers, build agent
-- [ ] Add bash/Python helper scripts for deployment tasks
+- [x] Create Azure DevOps account + project
+- [x] Link GitHub repo
+- [x] Define stages: Build → Test → Docker Build → Deploy
+- [x] Configure variables, triggers, build agent
+- [x] Add bash/Python helper scripts for deployment tasks
+- [ ] Fix azure-pipelines.yml
 
 ---
 
@@ -109,15 +110,6 @@ Each service:
 - [x] Write unit + integration tests
 - [x] Add Cucumber (Gherkin) for behaviour tests
 - [x] Integrate all tests into Azure pipeline
-
----
-
-## Agile
-
-- [x] Create product backlog (Azure Boards or Trello)
-- [x] Write user stories + acceptance criteria
-- [x] Plan two 1-week sprints
-- [x] After each, note completed vs pending
 
 ---
 
