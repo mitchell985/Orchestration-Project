@@ -89,7 +89,8 @@ Each service:
 - [x] Define stages: Build → Test → Docker Build → Deploy
 - [x] Configure variables, triggers, build agent
 - [x] Add bash/Python helper scripts for deployment tasks
-- [ ] Fix azure-pipelines.yml step input error.
+- [x] Fix azure-pipelines.yml step input error.
+- [ ] Look into self hosted build agents
 
 ---
 
