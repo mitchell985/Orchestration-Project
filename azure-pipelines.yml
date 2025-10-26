@@ -32,7 +32,8 @@ stages:
       - job: BuildServices
         displayName: "Build Microservices"
         pool:
-          vmImage: "ubuntu-latest"
+          # vmImage: "ubuntu-latest"
+          name: Self-Hosted
         steps:
           - task: Maven@3
             displayName: "Build Order Service"
@@ -80,7 +81,8 @@ stages:
       - job: RunTests
         displayName: "Run Unit Tests"
         pool:
-          vmImage: "ubuntu-latest"
+          # vmImage: "ubuntu-latest"
+          name: Self-Hosted
         steps:
           - task: Maven@3
             displayName: "Test Order Service"
@@ -119,7 +121,8 @@ stages:
       - job: BuildDockerImages
         displayName: "Build and Push Docker Images"
         pool:
-          vmImage: "ubuntu-latest"
+          # vmImage: "ubuntu-latest"
+          name: Self-Hosted
         steps:
           - task: Docker@2
             displayName: "Build Order Service Image"
@@ -161,7 +164,8 @@ stages:
       - deployment: DeployToK8s
         displayName: "Deploy Microservices"
         pool:
-          vmImage: "ubuntu-latest"
+          # vmImage: "ubuntu-latest"
+          name: Self-Hosted
         environment: "production"
         strategy:
           runOnce:
