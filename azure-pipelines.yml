@@ -35,7 +35,7 @@ stages:
           # vmImage: "ubuntu-latest"
           name: Self-Hosted
         steps:
-          - task: Maven@3
+          - task: Maven@4
             displayName: "Build Order Service"
             inputs:
               mavenPomFile: "order_service/pom.xml"
@@ -46,7 +46,7 @@ stages:
               jdkVersionOption: "1.21"
               mavenVersionOption: "Default"
 
-          - task: Maven@3
+          - task: Maven@4
             displayName: "Build Inventory Service"
             inputs:
               mavenPomFile: "inventory_service/pom.xml"
@@ -57,7 +57,7 @@ stages:
               jdkVersionOption: "1.21"
               mavenVersionOption: "Default"
 
-          - task: Maven@3
+          - task: Maven@4
             displayName: "Build Customer Service"
             inputs:
               mavenPomFile: "customer_service/pom.xml"
@@ -84,7 +84,7 @@ stages:
           # vmImage: "ubuntu-latest"
           name: Self-Hosted
         steps:
-          - task: Maven@3
+          - task: Maven@4
             displayName: "Test Order Service"
             inputs:
               mavenPomFile: "order_service/pom.xml"
@@ -94,7 +94,7 @@ stages:
               javaHomeOption: "JDKVersion"
               jdkVersionOption: "1.21"
 
-          - task: Maven@3
+          - task: Maven@4
             displayName: "Test Inventory Service"
             inputs:
               mavenPomFile: "inventory_service/pom.xml"
@@ -104,7 +104,7 @@ stages:
               javaHomeOption: "JDKVersion"
               jdkVersionOption: "1.21"
 
-          - task: Maven@3
+          - task: Maven@4
             displayName: "Test Customer Service"
             inputs:
               mavenPomFile: "customer_service/pom.xml"
