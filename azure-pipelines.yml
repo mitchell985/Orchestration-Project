@@ -32,12 +32,11 @@ stages:
         pool:
           name: Self-Hosted
         steps:
-          - task: JavaToolInstaller@0
-            displayName: 'Install JDK 21'
+          - task: JavaToolInstaller@1
             inputs:
-              versionSpec: '21' # Use '21' instead of '1.21'
+              versionSpec: '21'
               jdkArchitectureOption: 'x64'
-              jdkSourceOption: 'PreInstalled' # Tries to find it first, downloads if missing
+              jdkSourceOption: 'PreInstalled'
 
           - task: Maven@4
             displayName: "Build Order Service"
@@ -87,12 +86,11 @@ stages:
         pool:
           name: Self-Hosted
         steps:
-          - task: JavaToolInstaller@0
-            displayName: 'Install JDK 21'
+          - task: JavaToolInstaller@1
             inputs:
-              versionSpec: '21' # Use '21' instead of '1.21'
+              versionSpec: '21'
               jdkArchitectureOption: 'x64'
-              jdkSourceOption: 'PreInstalled' # Tries to find it first, downloads if missing
+              jdkSourceOption: 'PreInstalled'
 
           - task: Maven@4
             displayName: "Test Order Service"
