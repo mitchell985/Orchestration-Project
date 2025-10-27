@@ -17,7 +17,7 @@ variables:
   # Docker registry settings
   dockerRegistryServiceConnection: "MyDockerRegistry"
   imageRepository: "microservices"
-  containerRegistry: "myregistry.azurecr.io"
+  containerRegistry: "https://index.docker.io/v1/"
   dockerfilePath: "**/Dockerfile"
   tag: "$(Build.BuildId)"
 
@@ -32,7 +32,6 @@ stages:
       - job: BuildServices
         displayName: "Build Microservices"
         pool:
-          # vmImage: "ubuntu-latest"
           name: Self-Hosted
         steps:
         
@@ -82,7 +81,6 @@ stages:
       - job: RunTests
         displayName: "Run Unit Tests"
         pool:
-          # vmImage: "ubuntu-latest"
           name: Self-Hosted
         steps:
           - task: Maven@4
@@ -122,14 +120,9 @@ stages:
       - job: BuildDockerImages
         displayName: "Build and Push Docker Images"
         pool:
-          # vmImage: "ubuntu-latest"
           name: Self-Hosted
         steps:
         
-          - task: Docker@2
-            inputs:
-              containerRegistry: $(dockerRegistryServiceConnection)
-              command: 'login'
           - task: Docker@2
             displayName: "Build Order Service Image"
             inputs:
@@ -170,14 +163,13 @@ stages:
       - deployment: DeployToK8s
         displayName: "Deploy Microservices"
         pool:
-          # vmImage: "ubuntu-latest"
           name: Self-Hosted
         environment: "production"
         strategy:
           runOnce:
             deploy:
               steps:
-                - task: KubernetesManifest@0
+                - task: KubernetesManifest@1
                   displayName: "Deploy ConfigMaps"
                   inputs:
                     action: "deploy"
@@ -186,7 +178,7 @@ stages:
                     manifests: |
                       k8s/configmaps/**/*.yaml
 
-                - task: KubernetesManifest@0
+                - task: KubernetesManifest@1
                   displayName: "Deploy Secrets"
                   inputs:
                     action: "deploy"
@@ -195,7 +187,7 @@ stages:
                     manifests: |
                       k8s/secrets/**/*.yaml
 
-                - task: KubernetesManifest@0
+                - task: KubernetesManifest@1
                   displayName: "Deploy Services"
                   inputs:
                     action: "deploy"
@@ -204,7 +196,7 @@ stages:
                     manifests: |
                       k8s/services/**/*.yaml
 
-                - task: KubernetesManifest@0
+                - task: KubernetesManifest@1
                   displayName: "Deploy Applications"
                   inputs:
                     action: "deploy"
