@@ -40,8 +40,8 @@ Each service:
 
 ### Infrastructure
 
-- **Docker** containers for each service
-- **Kubernetes** (via Minikube/kind) for deployment and scaling
+- **Docker** containers for each service uploaded to my docker repo [https://hub.docker.com/repositories/opro](https://hub.docker.com/repositories/opro)
+- **Kubernetes** (via Azure Kubernetes Service) for deployment and scaling
 - **Azure DevOps** pipeline for build → test → containerize → deploy
 - **Prometheus + Grafana** for monitoring
 
@@ -90,7 +90,8 @@ Each service:
 - [x] Configure variables, triggers, build agent
 - [x] Add bash/Python helper scripts for deployment tasks
 - [x] Fix azure-pipelines.yml step input error.
-- [ ] Look into self hosted build agents
+- [x] Look into self hosted build agents
+- [x] DevOps working
 
 ---
 
