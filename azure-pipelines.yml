@@ -17,7 +17,7 @@ variables:
   # Docker registry settings
   dockerRegistryServiceConnection: "MyDockerRegistry"
   imageRepository: "opro"
-  containerRegistry: "https://index.docker.io/v1"
+  containerRegistry: "https://index.docker.io/v1/"
   dockerfilePath: "**/Dockerfile"
   tag: "$(Build.BuildId)"
 
@@ -205,9 +205,9 @@ stages:
                     manifests: |
                       k8s/deployments/**/*.yaml
                     containers: |
-                      $(containerRegistry)/$(imageRepository)/order-service:$(tag)
-                      $(containerRegistry)/$(imageRepository)/inventory-service:$(tag)
-                      $(containerRegistry)/$(imageRepository)/customer-service:$(tag)
+                      $(imageRepository)/order-service:$(tag)
+                      $(imageRepository)/inventory-service:$(tag)
+                      $(imageRepository)/customer-service:$(tag)
 
                 - bash: |
                     echo "Deployment completed successfully!"
