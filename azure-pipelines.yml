@@ -23,7 +23,7 @@ variables:
 
   # Kubernetes settings
   kubernetesServiceConnection: "MyK8sCluster"
-  namespace: "microservices"
+  namespace: "default"
 
 stages:
   - stage: Build
