@@ -16,14 +16,14 @@ trigger:
 variables:
   # Docker registry settings
   dockerRegistryServiceConnection: "MyDockerRegistry"
-  imageRepository: "microservices"
-  containerRegistry: "myregistry.azurecr.io"
+  imageRepository: "opro"
+  containerRegistry: "https://index.docker.io/v1/"
   dockerfilePath: "**/Dockerfile"
   tag: "$(Build.BuildId)"
 
   # Kubernetes settings
   kubernetesServiceConnection: "MyK8sCluster"
-  namespace: "microservices"
+  namespace: "default"
 
 stages:
   - stage: Build
@@ -32,9 +32,10 @@ stages:
       - job: BuildServices
         displayName: "Build Microservices"
         pool:
-          vmImage: "ubuntu-latest"
+          name: Self-Hosted
         steps:
-          - task: Maven@3
+        
+          - task: Maven@4
             displayName: "Build Order Service"
             inputs:
               mavenPomFile: "order_service/pom.xml"
@@ -45,7 +46,7 @@ stages:
               jdkVersionOption: "1.21"
               mavenVersionOption: "Default"
 
-          - task: Maven@3
+          - task: Maven@4
             displayName: "Build Inventory Service"
             inputs:
               mavenPomFile: "inventory_service/pom.xml"
@@ -56,7 +57,7 @@ stages:
               jdkVersionOption: "1.21"
               mavenVersionOption: "Default"
 
-          - task: Maven@3
+          - task: Maven@4
             displayName: "Build Customer Service"
             inputs:
               mavenPomFile: "customer_service/pom.xml"
@@ -80,9 +81,9 @@ stages:
       - job: RunTests
         displayName: "Run Unit Tests"
         pool:
-          vmImage: "ubuntu-latest"
+          name: Self-Hosted
         steps:
-          - task: Maven@3
+          - task: Maven@4
             displayName: "Test Order Service"
             inputs:
               mavenPomFile: "order_service/pom.xml"
@@ -92,7 +93,7 @@ stages:
               javaHomeOption: "JDKVersion"
               jdkVersionOption: "1.21"
 
-          - task: Maven@3
+          - task: Maven@4
             displayName: "Test Inventory Service"
             inputs:
               mavenPomFile: "inventory_service/pom.xml"
@@ -102,7 +103,7 @@ stages:
               javaHomeOption: "JDKVersion"
               jdkVersionOption: "1.21"
 
-          - task: Maven@3
+          - task: Maven@4
             displayName: "Test Customer Service"
             inputs:
               mavenPomFile: "customer_service/pom.xml"
@@ -119,8 +120,9 @@ stages:
       - job: BuildDockerImages
         displayName: "Build and Push Docker Images"
         pool:
-          vmImage: "ubuntu-latest"
+          name: Self-Hosted
         steps:
+        
           - task: Docker@2
             displayName: "Build Order Service Image"
             inputs:
@@ -161,13 +163,13 @@ stages:
       - deployment: DeployToK8s
         displayName: "Deploy Microservices"
         pool:
-          vmImage: "ubuntu-latest"
+          name: Self-Hosted
         environment: "production"
         strategy:
           runOnce:
             deploy:
               steps:
-                - task: KubernetesManifest@0
+                - task: KubernetesManifest@1
                   displayName: "Deploy ConfigMaps"
                   inputs:
                     action: "deploy"
@@ -176,7 +178,7 @@ stages:
                     manifests: |
                       k8s/configmaps/**/*.yaml
 
-                - task: KubernetesManifest@0
+                - task: KubernetesManifest@1
                   displayName: "Deploy Secrets"
                   inputs:
                     action: "deploy"
@@ -185,7 +187,7 @@ stages:
                     manifests: |
                       k8s/secrets/**/*.yaml
 
-                - task: KubernetesManifest@0
+                - task: KubernetesManifest@1
                   displayName: "Deploy Services"
                   inputs:
                     action: "deploy"
@@ -194,7 +196,7 @@ stages:
                     manifests: |
                       k8s/services/**/*.yaml
 
-                - task: KubernetesManifest@0
+                - task: KubernetesManifest@1
                   displayName: "Deploy Applications"
                   inputs:
                     action: "deploy"
@@ -203,9 +205,9 @@ stages:
                     manifests: |
                       k8s/deployments/**/*.yaml
                     containers: |
-                      $(containerRegistry)/$(imageRepository)/order-service:$(tag)
-                      $(containerRegistry)/$(imageRepository)/inventory-service:$(tag)
-                      $(containerRegistry)/$(imageRepository)/customer-service:$(tag)
+                      $(imageRepository)/order-service:$(tag)
+                      $(imageRepository)/inventory-service:$(tag)
+                      $(imageRepository)/customer-service:$(tag)
 
                 - bash: |
                     echo "Deployment completed successfully!"
