@@ -17,8 +17,6 @@ variables:
   # Docker registry settings
   dockerRegistryServiceConnection: "MyDockerRegistry"
   imageRepository: "opro"
-  containerRegistry: "https://index.docker.io/v1/"
-  dockerfilePath: "**/Dockerfile"
   tag: "$(Build.BuildId)"
 
   # Kubernetes settings
