@@ -84,7 +84,7 @@ public class InventoryController {
     }
 
     /**
-     * Request DTOs using records
+     * Request DTOs records
      */
     public record CreateItemRequest(
             String productId,
