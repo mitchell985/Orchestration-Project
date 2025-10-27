@@ -207,8 +207,12 @@ stages:
                       $(imageRepository)/customer-service:$(tag)
 
                 - task: Kubernetes@1
-                  displayName: 'Verify Deployment (get pods)'
+                  displayName: Verify Deployment
                   inputs:
+                    connectionType: 'Kubernetes Service Connection'
+                    kubernetesServiceEndpoint: $(kubernetesServiceConnection)
+                    namespace: $(namespace)
                     command: 'get'
-                    namespace: '$(namespace)'
                     arguments: 'pods'
+                    secretType: 'dockerRegistry'
+                    containerRegistryType: 'Azure Container Registry'
