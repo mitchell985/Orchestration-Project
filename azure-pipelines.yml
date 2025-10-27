@@ -130,6 +130,7 @@ stages:
               repository: "$(imageRepository)/order-service"
               dockerfile: "order_service/Dockerfile"
               containerRegistry: "$(dockerRegistryServiceConnection)"
+              arguments: "--platform linux/amd64"
               tags: |
                 $(tag)
                 latest
@@ -141,6 +142,7 @@ stages:
               repository: "$(imageRepository)/inventory-service"
               dockerfile: "inventory_service/Dockerfile"
               containerRegistry: "$(dockerRegistryServiceConnection)"
+              arguments: "--platform linux/amd64"
               tags: |
                 $(tag)
                 latest
@@ -152,6 +154,7 @@ stages:
               repository: "$(imageRepository)/customer-service"
               dockerfile: "customer_service/Dockerfile"
               containerRegistry: "$(dockerRegistryServiceConnection)"
+              arguments: "--platform linux/amd64"
               tags: |
                 $(tag)
                 latest
