@@ -17,8 +17,6 @@ variables:
   # Docker registry settings
   dockerRegistryServiceConnection: "MyDockerRegistry"
   imageRepository: "opro"
-  containerRegistry: "https://index.docker.io/v1/"
-  dockerfilePath: "**/Dockerfile"
   tag: "$(Build.BuildId)"
 
   # Kubernetes settings
@@ -34,7 +32,6 @@ stages:
         pool:
           name: Self-Hosted
         steps:
-        
           - task: Maven@4
             displayName: "Build Order Service"
             inputs:
@@ -209,7 +206,13 @@ stages:
                       $(imageRepository)/inventory-service:$(tag)
                       $(imageRepository)/customer-service:$(tag)
 
-                - bash: |
-                    echo "Deployment completed successfully!"
-                    kubectl get pods -n $(namespace)
-                  displayName: "Verify Deployment"
+                - task: Kubernetes@1
+                  displayName: Verify Deployment
+                  inputs:
+                    connectionType: 'Kubernetes Service Connection'
+                    kubernetesServiceEndpoint: $(kubernetesServiceConnection)
+                    namespace: $(namespace)
+                    command: 'get'
+                    arguments: 'pods'
+                    secretType: 'dockerRegistry'
+                    containerRegistryType: 'Azure Container Registry'
