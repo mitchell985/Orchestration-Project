@@ -32,12 +32,6 @@ stages:
         pool:
           name: Self-Hosted
         steps:
-          - task: JavaToolInstaller@1
-            inputs:
-              versionSpec: '21'
-              jdkArchitectureOption: 'x64'
-              jdkSourceOption: 'PreInstalled'
-
           - task: Maven@4
             displayName: "Build Order Service"
             inputs:
@@ -86,12 +80,6 @@ stages:
         pool:
           name: Self-Hosted
         steps:
-          - task: JavaToolInstaller@1
-            inputs:
-              versionSpec: '21'
-              jdkArchitectureOption: 'x64'
-              jdkSourceOption: 'PreInstalled'
-
           - task: Maven@4
             displayName: "Test Order Service"
             inputs:
