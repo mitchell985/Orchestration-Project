@@ -119,7 +119,6 @@ stages:
         pool:
           name: Self-Hosted
         steps:
-        
           - task: Docker@2
             displayName: "Build Order Service Image"
             inputs:
@@ -207,12 +206,12 @@ stages:
                       $(imageRepository)/customer-service:$(tag)
 
                 - task: Kubernetes@1
-                  displayName: Verify Deployment
+                  displayName: Verify Deployments
                   inputs:
-                    connectionType: 'Kubernetes Service Connection'
+                    connectionType: "Kubernetes Service Connection"
                     kubernetesServiceEndpoint: $(kubernetesServiceConnection)
                     namespace: $(namespace)
-                    command: 'get'
-                    arguments: 'pods'
-                    secretType: 'dockerRegistry'
-                    containerRegistryType: 'Azure Container Registry'
+                    command: "get"
+                    arguments: "pods"
+                    secretType: "dockerRegistry"
+                    containerRegistryType: "Azure Container Registry"
