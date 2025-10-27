@@ -206,7 +206,9 @@ stages:
                       $(imageRepository)/inventory-service:$(tag)
                       $(imageRepository)/customer-service:$(tag)
 
-                - bash: |
-                    echo "Deployment completed successfully!"
-                    kubectl get pods -n $(namespace)
-                  displayName: "Verify Deployment"
+                - task: Kubernetes@1
+                  displayName: 'Verify Deployment (get pods)'
+                  inputs:
+                    command: 'get'
+                    namespace: '$(namespace)'
+                    arguments: 'pods'
